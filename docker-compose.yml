@@ -3,7 +3,7 @@ services:
   theharvester.svc.local:
     container_name: theHarvester
     volumes:
-      - ./api-keys.yaml:/app/api-keys.yaml
+      - ./apiKeys.yaml:/app/apiKeys.yaml
     build: .
     ports:
       - "8080:80"

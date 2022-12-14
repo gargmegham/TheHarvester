@@ -32,7 +32,7 @@ setup(
             'wordlists/dns-names.txt',
             'wordlists/dorks.txt',
             'wordlists/names_small.txt',
-            'api-keys.yaml',
+            'apiKeys.yaml',
             'proxies.yaml'
         ]
         )
