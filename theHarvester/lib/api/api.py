@@ -84,7 +84,6 @@ async def bot() -> Dict[str, str]:
 
 
 @app.get("/sources", response_class=UJSONResponse)
-@limiter.limit("5/minute")
 async def getsources(request: Request):
     # Endpoint for user to query for available sources theHarvester supports
     # Rate limit of 5 requests per minute
