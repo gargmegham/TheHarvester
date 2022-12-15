@@ -14,14 +14,14 @@ class Core:
     @staticmethod
     def api_keys() -> dict:
         try:
-            with open("/etc/theHarvester/api-keys.yaml", "r") as api_keys:
+            with open('/etc/theHarvester/apiKeys.yaml', 'r') as api_keys:
                 keys = yaml.safe_load(api_keys)
         except FileNotFoundError:
             try:
-                with open("/usr/local/etc/theHarvester/api-keys.yaml", "r") as api_keys:
+                with open('/usr/local/etc/theHarvester/apiKeys.yaml', 'r') as api_keys:
                     keys = yaml.safe_load(api_keys)
             except FileNotFoundError:
-                with open("api-keys.yaml", "r") as api_keys:
+                with open('apiKeys.yaml', 'r') as api_keys:
                     keys = yaml.safe_load(api_keys)
         return keys["apikeys"]
 

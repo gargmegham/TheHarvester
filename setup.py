@@ -24,17 +24,15 @@ setup(
         "Operating System :: OS Independent",
     ],
     data_files=[
-        (
-            "/etc/theHarvester",
-            [
-                "wordlists/general/common.txt",
-                "wordlists/dns-big.txt",
-                "wordlists/dns-names.txt",
-                "wordlists/dorks.txt",
-                "wordlists/names_small.txt",
-                "api-keys.yaml",
-                "proxies.yaml",
-            ],
+        ('/etc/theHarvester', [
+            'wordlists/general/common.txt',
+            'wordlists/dns-big.txt',
+            'wordlists/dns-names.txt',
+            'wordlists/dorks.txt',
+            'wordlists/names_small.txt',
+            'apiKeys.yaml',
+            'proxies.yaml'
+        ]
         )
     ],
 )
