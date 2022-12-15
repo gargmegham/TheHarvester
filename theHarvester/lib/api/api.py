@@ -89,6 +89,7 @@ async def getsources(request: Request):
     # Endpoint for user to query for available sources theHarvester supports
     # Rate limit of 5 requests per minute
     try:
+        logger.info(f"Starting sources request")
         sources = __main__.Core.get_supportedengines()
         return {"sources": sources}
     except Exception as err:
