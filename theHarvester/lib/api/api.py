@@ -96,7 +96,6 @@ async def getsources(request: Request):
 
 
 @app.get("/dnsbrute", response_class=UJSONResponse)
-@limiter.limit("5/minute")
 async def dnsbrute(
     request: Request,
     user_agent: str = Header(None),
@@ -132,7 +131,6 @@ async def dnsbrute(
 
 
 @app.get("/query", response_class=UJSONResponse)
-@limiter.limit("2/minute")
 async def query(
     request: Request,
     dns_server: str = Query(""),
