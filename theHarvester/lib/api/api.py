@@ -8,8 +8,20 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from starlette.responses import RedirectResponse
 from starlette.staticfiles import StaticFiles
-
 from theHarvester import __main__
+import logging
+import traceback
+
+
+logFileFormatter = logging.Formatter(
+    fmt=f"%(levelname)s %(asctime)s (%(relativeCreated)d) \t %(pathname)s F%(funcName)s L%(lineno)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+fileHandler = logging.FileHandler(filename='api.log')
+fileHandler.setFormatter(logFileFormatter)
+fileHandler.setLevel(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logger.addHandler(fileHandler)
 
 limiter = Limiter(key_func=get_remote_address)
 app = FastAPI(
@@ -76,8 +88,11 @@ async def bot() -> Dict[str, str]:
 async def getsources(request: Request):
     # Endpoint for user to query for available sources theHarvester supports
     # Rate limit of 5 requests per minute
-    sources = __main__.Core.get_supportedengines()
-    return {"sources": sources}
+    try:
+        sources = __main__.Core.get_supportedengines()
+        return {"sources": sources}
+    except Exception as err:
+        logger.info(f"Error in sources :: {err} :: {traceback.format_exc()}")
 
 
 @app.get("/dnsbrute", response_class=UJSONResponse)
