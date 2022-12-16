@@ -17,3 +17,4 @@ apiKeys.yaml
 .DS_Store
 .venv
 .pyre
+api.log

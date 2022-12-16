@@ -161,17 +161,7 @@ async def query(
         response = RedirectResponse(app.url_path_for("bot"))
         return response
     try:
-        (
-            asns,
-            iurls,
-            twitter_people_list,
-            linkedin_people_list,
-            linkedin_links,
-            aurls,
-            aips,
-            aemails,
-            ahosts,
-        ) = await __main__.start(
+        full_hosts = await __main__.start(
             argparse.Namespace(
                 dns_brute=dns_brute,
                 dns_lookup=dns_lookup,
@@ -190,17 +180,7 @@ async def query(
             )
         )
 
-        return {
-            "asns": asns,
-            "interesting_urls": iurls,
-            "twitter_people": twitter_people_list,
-            "linkedin_people": linkedin_people_list,
-            "linkedin_links": linkedin_links,
-            "trello_urls": aurls,
-            "ips": aips,
-            "emails": aemails,
-            "hosts": ahosts,
-        }
+        return full_hosts
     except Exception:
         return {
             "exception": "Please contact the server administrator to check the issue"

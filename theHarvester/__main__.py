@@ -4,6 +4,7 @@ from theHarvester.discovery import *
 from theHarvester.discovery import dnssearch, takeover, shodansearch
 from theHarvester.discovery.constants import *
 from theHarvester.lib import hostchecker
+from copy import deepcopy
 from theHarvester.lib import stash
 from theHarvester.lib.core import *
 import argparse
@@ -762,6 +763,11 @@ async def start(rest_args: Optional[argparse.Namespace] = None):
         and rest_args.dns_brute is False
     ):
         # Indicates user is using REST api but not wanting output to be saved to a file
+        full_hosts = [
+            host
+            for host in full
+            if ':' in host
+        ]
         full = [
             host
             if ":" in host and word in host
@@ -778,17 +784,7 @@ async def start(rest_args: Optional[argparse.Namespace] = None):
             ]
         )
         # return list(set(all_emails)), return_ips, full, '', ''
-        return (
-            total_asns,
-            interesting_urls,
-            twitter_people_list_tracker,
-            linkedin_people_list_tracker,
-            linkedin_links_tracker,
-            all_urls,
-            all_ip,
-            all_emails,
-            all_hosts,
-        )
+        return full_hosts
     # Check to see if all_emails and all_hosts are defined.
     try:
         all_emails
