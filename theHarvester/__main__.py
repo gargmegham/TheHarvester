@@ -756,35 +756,12 @@ async def start(rest_args: Optional[argparse.Namespace] = None):
         await asyncio.gather(*tasks, return_exceptions=True)
 
     await handler(lst=stor_lst)
-    return_ips: List = []
     if (
         rest_args is not None
         and len(rest_filename) == 0
         and rest_args.dns_brute is False
     ):
-        # Indicates user is using REST api but not wanting output to be saved to a file
-        full_hosts = [
-            host
-            for host in full
-            if ':' in host
-        ]
-        full = [
-            host
-            if ":" in host and word in host
-            else word in host.split(":")[0] and host
-            for host in full
-        ]
-        full = list({host for host in full if host})
-        full.sort()
-        # cast to string so Rest API can understand type
-        return_ips.extend(
-            [
-                str(ip)
-                for ip in sorted([netaddr.IPAddress(ip.strip()) for ip in set(all_ip)])
-            ]
-        )
-        # return list(set(all_emails)), return_ips, full, '', ''
-        return full_hosts
+        return full
     # Check to see if all_emails and all_hosts are defined.
     try:
         all_emails
